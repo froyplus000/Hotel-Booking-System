@@ -20,7 +20,7 @@ deploy/
 
 ```
 
-If we look at folder structure of this Hotel Booking project, we'll see that there are multiple projects for a single solution file. The reason we want separation of concern in this project, that's why we have many projects to represent each roles and reposibilities in the system.
+If we look at folder structure of this Hotel Booking project, we'll see that there are multiple projects for a single solution file. The reason is we want separation of concern in this project, that's why we have many projects to represent each roles and reposibilities in the system.
 
 ## Clean Architecture
 
