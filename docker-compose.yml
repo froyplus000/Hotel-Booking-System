@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: deploy/docker/Api.Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Postgres=Host=db;Username=postgres;Password=postgres;Database=hotel
+      - Redis__Connection=redis:6379
+      - AWS__ServiceURL=http://localstack:4566
+      - AWS__Region=ap-southeast-1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis
+      - localstack
+
+  worker:
+    build:
+      context: .
+      dockerfile: deploy/docker/Worker.Dockerfile
+    environment:
+      - ConnectionStrings__Postgres=Host=db;Username=postgres;Password=postgres;Database=hotel
+      - Redis__Connection=redis:6379
+      - AWS__ServiceURL=http://localstack:4566
+      - AWS__Region=ap-southeast-1
+    depends_on:
+      - db
+      - redis
+      - localstack
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hotel
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - SERVICES=sqs,s3,ses
+      - AWS_DEFAULT_REGION=ap-southeast-1
+    ports:
+      - "4566:4566"
+
+volumes:
+  pgdata:
