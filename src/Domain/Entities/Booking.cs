@@ -14,7 +14,7 @@ namespace HotelBooking.Domain.Entities
         public decimal TotalPrice { get; private set; }
         public BookingStatus Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
-
+        public User? User { get; private set;}
         // Encapsulation: Use a private list for backing field
         private readonly List<BookingRoom> _rooms = new();
         // Publicly expose ONLY a read-only view. 
@@ -46,7 +46,7 @@ namespace HotelBooking.Domain.Entities
             if (_rooms.Any(r => r.RoomId == room.Id))
                 throw new InvalidOperationException("Room already added");
 
-            var bookingRoom = new BookingRoom(room.Id, priceAtBooking);
+            var bookingRoom = new BookingRoom(Id, room.Id, priceAtBooking);
             _rooms.Add(bookingRoom);
             
             CalculateTotal(); // Re-calculate price

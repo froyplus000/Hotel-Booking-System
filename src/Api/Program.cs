@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
+using HotelBooking.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// 1. Get the connection string from appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// 2. Register the DbContext
+// "Use PostgreSQL with this connection string"
+builder.Services.AddDbContext<HotelDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 
