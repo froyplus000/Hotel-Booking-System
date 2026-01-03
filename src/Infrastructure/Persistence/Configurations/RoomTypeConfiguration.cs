@@ -34,6 +34,11 @@ namespace HotelBooking.Infrastructure.Persistence.Configurations
                 .WithMany(h => h.RoomTypes)
                 .HasForeignKey(rt => rt.HotelId)
                 .OnDelete(DeleteBehavior.Cascade);
+             // Room belongs to RoomType
+            builder.HasMany(rt => rt.Rooms)
+                .WithOne(r => r.RoomType)
+                .HasForeignKey(r => r.RoomTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
