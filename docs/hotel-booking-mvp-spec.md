@@ -32,6 +32,8 @@
   4.  API
   5.  Worker (later)
 
+![](./screenshots/dependencies_request_flows.png)
+
 ## Database Design & Modeling
 
 - PostgreSQL
