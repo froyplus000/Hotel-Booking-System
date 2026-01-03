@@ -106,4 +106,4 @@ Imagine you put everything into a single HotelBooking.Api project:
 
 > That’s a lot more impressive than a “single giant Web API project”.
 
-![Dependencies and Runtime Request Flow](../screenshots/dependencies_request_flows.png)
+![Dependencies and Runtime Request Flow](../screenshots/dependencies-request-flows.png)
