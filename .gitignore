@@ -56,3 +56,5 @@ nunit-*.xml
 # ENV
 .env
 .env.production
+
+**/.DS_Store

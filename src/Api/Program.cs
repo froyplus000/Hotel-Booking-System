@@ -1,4 +1,6 @@
+using HotelBooking.Domain.Repositories;
 using HotelBooking.Infrastructure.Persistence;
+using HotelBooking.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // "Use PostgreSQL with this connection string"
 builder.Services.AddDbContext<HotelDbContext>(options =>
     options.UseNpgsql(connectionString));
+
+// Repository Registration
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
