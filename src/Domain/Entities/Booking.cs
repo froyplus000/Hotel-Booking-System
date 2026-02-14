@@ -32,8 +32,8 @@ namespace HotelBooking.Domain.Entities
 
             Id = Guid.NewGuid();
             UserId = userId;
-            CheckInDate = checkIn;
-            CheckOutDate = checkOut;
+            CheckInDate = DateTime.SpecifyKind(checkIn, DateTimeKind.Utc);
+            CheckOutDate = DateTime.SpecifyKind(checkOut, DateTimeKind.Utc);
             NumberOfNights = (checkOut - checkIn).Days; // Fixed Math
             Status = BookingStatus.Pending;
             CreatedAt = DateTime.UtcNow;
