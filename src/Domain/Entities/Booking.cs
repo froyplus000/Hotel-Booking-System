@@ -62,6 +62,27 @@ namespace HotelBooking.Domain.Entities
         {
             Status = BookingStatus.Confirmed;
         }
+
+        public void UpdateDates(DateTime checkIn, DateTime checkOut)
+        {
+            if (Status == BookingStatus.Confirmed)
+                throw new InvalidOperationException("Cannot modify dates of a confirmed booking");
+
+            if (checkIn >= checkOut)
+                throw new ArgumentException("Check-out must be after check-in");
+
+            CheckInDate = DateTime.SpecifyKind(checkIn, DateTimeKind.Utc);
+            CheckOutDate = DateTime.SpecifyKind(checkOut, DateTimeKind.Utc);
+            NumberOfNights = (checkOut - checkIn).Days;
+            CalculateTotal();
+        }
+
+        public void Cancel()
+        {
+            if (Status == BookingStatus.Cancelled)
+                throw new InvalidOperationException("Booking is already cancelled");
+            Status = BookingStatus.Cancelled;
+        }
     }
 
     public enum BookingStatus
