@@ -1,4 +1,3 @@
-using HotelBooking.Application.Users.Queries.GetUserById;
 using MediatR;
 
 namespace HotelBooking.Application.Users.Commands.CreateUser

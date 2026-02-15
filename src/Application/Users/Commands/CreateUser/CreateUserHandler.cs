@@ -1,4 +1,3 @@
-using HotelBooking.Application.Users.Queries.GetUserById;
 using HotelBooking.Domain.Entities;
 using HotelBooking.Domain.Repositories;
 using MediatR;

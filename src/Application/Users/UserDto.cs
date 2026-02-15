@@ -1,4 +1,4 @@
-namespace HotelBooking.Application.Users.Queries.GetUserById
+namespace HotelBooking.Application.Users
 {
     public record UserDto(
         Guid UserId,

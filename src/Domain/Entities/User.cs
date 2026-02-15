@@ -21,5 +21,20 @@ namespace HotelBooking.Domain.Entities
             LastName = lastName;
             Bookings = new List<Booking>();
         }
+
+        public void Update(string email, string firstName, string lastName)
+        {
+            // You can add validation here if needed
+            if (string.IsNullOrWhiteSpace(email)) 
+                throw new ArgumentException(nameof(email));
+            if (string.IsNullOrWhiteSpace(firstName)) 
+                throw new ArgumentException(nameof(firstName));
+            if (string.IsNullOrWhiteSpace(lastName)) 
+                throw new ArgumentException(nameof(lastName));
+            
+            Email = email;
+            FirstName = firstName;
+            LastName = lastName;
+        }
     }
 }
